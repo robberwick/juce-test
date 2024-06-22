@@ -5,7 +5,7 @@
 #include "melatonin_inspector/melatonin_inspector.h"
 
 //==============================================================================
-class PluginEditor : public juce::AudioProcessorEditor
+class PluginEditor : public juce::AudioProcessorEditor, private juce::Slider::Listener
 {
 public:
     explicit PluginEditor (PluginProcessor&);
@@ -20,6 +20,8 @@ private:
     // access the processor object that created it.
     PluginProcessor& processorRef;
     std::unique_ptr<melatonin::Inspector> inspector;
-    juce::TextButton inspectButton { "Inspect the UI" };
+    juce::Slider gainslider;
+
+    void sliderValueChanged(juce::Slider*) override;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginEditor)
 };
